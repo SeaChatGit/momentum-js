@@ -194,6 +194,9 @@ momentum.Draggable.prototype.updateBounds = function(optNoCache) {
         var elementOffset = momentum.utils.getPageOffset(/** @type {Element} */ (
           this.config.elementBounds
         ));
+        if (!targetOffset || !elementOffset) {
+          return;
+        }
 
         // Getting relative position to the handler target
         elementOffset.x -= targetOffset.x;
@@ -310,6 +313,9 @@ momentum.Draggable.prototype.update = function(optPreventHandler) {
 
     if (position == 'relative' || position == 'absolute') {
       var offset = momentum.utils.getPageOffset(parentElement);
+      if(!offset) {
+        return;
+      }
 
       if (offset.x > containerOffset.x) {
         containerOffset.x = offset.x;

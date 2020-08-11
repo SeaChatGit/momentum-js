@@ -211,13 +211,16 @@ momentum.utils.getDocumentScroll = function() {
  * @return {momentum.Coordinate}
  */
 momentum.utils.getPageOffset = function(element) {
-  var ownerDoc = momentum.utils.getOwnerDocument(element);
   var offsetPosition = new momentum.Coordinate();
-  var boundingRect = element.getBoundingClientRect();
-  var scrollPosition = momentum.utils.getDocumentScroll();
+  try {
+    var boundingRect = element.getBoundingClientRect();
+    var scrollPosition = momentum.utils.getDocumentScroll();
 
-  offsetPosition.x = boundingRect.left + scrollPosition.x;
-  offsetPosition.y = boundingRect.top + scrollPosition.y;
+    offsetPosition.x = boundingRect.left + scrollPosition.x;
+    offsetPosition.y = boundingRect.top + scrollPosition.y;
 
-  return offsetPosition;
+    return offsetPosition;
+  } catch (e) {
+    return null;
+  }
 };
